@@ -14,8 +14,10 @@ def find_files_in_directory_startwith_deep(path):
     return [file for file in os.listdir(path) if file.startswith("deep")]
 
 
-print(find_files_in_directory_startwith_deep("C:/Users/אלישר/Desktop/Notebooks-master/week05/images")) 
+# Please write your own path!
+print(find_files_in_directory_startwith_deep("C:/Users/אלישר/Desktop/Notebooks-master/week05/images"))
 
+print("--------------------------------------")
 ##############################################
 ##############################################
 # I don't have vinaigrette
@@ -54,7 +56,7 @@ try:
     random_date_between_2_dates(datetime.datetime.strptime(date_1, "%Y-%m-%d").date()
                                 ,datetime.datetime.strptime(date_2, "%Y-%m-%d").date())
 except ValueError:
-    print("Correct format is: YYYY-MM-DD")
+    print("Wrong format: the correct format is: YYYY-MM-DD")
 
 #####################################################
 
