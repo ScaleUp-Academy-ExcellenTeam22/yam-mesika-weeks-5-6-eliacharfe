@@ -2,6 +2,8 @@ import datetime
 import os
 import random
 
+# That's the way
+
 
 def find_files_in_directory_startwith_deep(path):
     """
@@ -12,9 +14,11 @@ def find_files_in_directory_startwith_deep(path):
     return [file for file in os.listdir(path) if file.startswith("deep")]
 
 
-print(find_files_in_directory_startwith_deep("C:/Users/אלישר/Desktop/Notebooks-master/week05/images"))
+print(find_files_in_directory_startwith_deep("C:/Users/אלישר/Desktop/Notebooks-master/week05/images")) 
 
 ##############################################
+##############################################
+# I don't have vinaigrette
 
 
 def get_random_date_between(date1, date2):
