@@ -14,10 +14,9 @@ def find_files_in_directory_startwith_deep(path):
     return [file for file in os.listdir(path) if file.startswith("deep")]
 
 
-# Please write your own path!
-print(find_files_in_directory_startwith_deep("C:/Users/אלישר/Desktop/Notebooks-master/week05/images"))
+print(f"list of files that start with deep: {find_files_in_directory_startwith_deep('images')}")
 
-print("--------------------------------------")
+print("--------------------------------------\n")
 ##############################################
 ##############################################
 # I don't have vinaigrette
@@ -35,7 +34,7 @@ def get_random_date_between(date1, date2):
     return str(random_date)
 
 
-def random_date_between_2_dates(date1, date2):
+def random_date_between_dates_check_if_monday(date1, date2):
     """
      The function gets 2 dates and after generate a random number between them print "I dont have vinaigrette
      if the the random date fall on monday
@@ -53,8 +52,8 @@ date_1 = input("Enter a date\n")
 date_2 = input("Enter a second date\n")
 
 try:
-    random_date_between_2_dates(datetime.datetime.strptime(date_1, "%Y-%m-%d").date()
-                                ,datetime.datetime.strptime(date_2, "%Y-%m-%d").date())
+    random_date_between_dates_check_if_monday(datetime.datetime.strptime(date_1, "%Y-%m-%d").date(),
+                                              datetime.datetime.strptime(date_2, "%Y-%m-%d").date())
 except ValueError:
     print("Wrong format: the correct format is: YYYY-MM-DD")
 
