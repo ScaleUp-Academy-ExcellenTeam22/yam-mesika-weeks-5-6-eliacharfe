@@ -14,7 +14,7 @@ def join(*args, sep='-'):
         return None
     lst = []
     for lst_args in args:
-        [lst.append(argument) for argument in lst_args]
+        lst += [argument for argument in lst_args]
         lst.append(sep)
     return lst[:-1]
 
