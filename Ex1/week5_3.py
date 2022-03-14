@@ -1,33 +1,24 @@
 # לחששנית
+import re
 
 
-def whisperer():
+def find_all_hidden_messages_in_a_binary_file_via_pattern(path, pattern):
     """
-    Open a binary file with encrypted messages in a logo, the messages are words that have only
-    lowercase letters more or equals to 5 length that ends by the character '!'. The function
-    returns a list of those messages
+    The function gets a path to a binary file, and a binary pattern and search all "strings" that
+    matches the pattern (those are coded messages in the file) then returns a list of those messages
+    as regular strings.
     :return: A list of the hidden messages
     """
-    with open("resources/logo.jpg", "rb") as file:
-        counter = 0
-        lst = []
-        word = ''
-
-        for line in file.readlines():
-            for char in line:
-                if char in range(97, 123):
-                    counter += 1
-                    word += chr(char)
-                if counter >= 5 and char == 33:
-                    lst.append(word + chr(char))
-                    counter = 0
-                    word = ''
-                if char not in range(97, 123):
-                    counter = 0
-                    word = ''
-        return lst
+    with open(path, "rb") as encrypted_binary_file:
+        list_hidden_messages = []
+        for line in encrypted_binary_file.readlines():
+            hidden_messages = re.compile(pattern).findall(line)
+            if hidden_messages:
+                list_hidden_messages += [hidden_msg.decode('ascii') for hidden_msg in hidden_messages]
+        return list_hidden_messages
 
 
 if __name__ == '__main__':
-    print(whisperer())
+    print('\n'.join(
+        find_all_hidden_messages_in_a_binary_file_via_pattern("resources/logo.jpg", b'[a-z]{5,}!')))
 
