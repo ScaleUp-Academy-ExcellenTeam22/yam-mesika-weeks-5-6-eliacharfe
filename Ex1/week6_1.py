@@ -36,19 +36,6 @@ def average_runtime(data_structure, word: str):
     return time.time() - start_time
 
 
-long_words_file = open("resources/words.txt")
-my_list = build_list_of_words(long_words_file)
-my_set = build_set_of_words(long_words_file)
-
-print(f"time of search in list: {average_runtime(my_list, 'zwitterion')}")
-print(f"time of search in set: {average_runtime(my_set, 'zwitterion')}")
-
-print("----------------------------------------------------------\n")
-long_words_file.close()
-
-
-#############################################
-#############################################
 # -- שטחולנדיה
 
 
@@ -76,5 +63,14 @@ def find_special_state(file):
         file.seek(0)
 
 
-text_file = open("resources/states.txt")
-print(find_special_state(text_file))
+if __name__ == '__main__':
+    long_words_file = open("resources/words.txt")
+    my_list = build_list_of_words(long_words_file)
+    my_set = build_set_of_words(long_words_file)
+    print(f"time of search in list: {average_runtime(my_list, 'zwitterion')}")
+    print(f"time of search in set: {average_runtime(my_set, 'zwitterion')}")
+    long_words_file.close()
+    print("----------------------------------------------------------")
+
+    text_file = open("resources/states.txt")
+    print(find_special_state(text_file))
