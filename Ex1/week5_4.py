@@ -23,10 +23,6 @@ def interleave(*args):
     return list(sum(list_of_tuples, ()))
 
 
-print(f"Regular version: {interleave('abc', [1, 2, 3], ('!', '@', '#'))}")
-
-
-#####################################################
 # -- Generator version:
 
 
@@ -48,63 +44,55 @@ my_list = []
 my_list += [item for element in interleave_generator('abc', [1, 2, 3], ('!', '@', '#'))
             for item in itertools.chain(element)]
 
-print(f"Generator version: {my_list}")
-print("-" * 60)
 
-
-# for element in interleave_generator('abc', [1, 2, 3], ('!', '@', '#')):
-#     for item in itertools.chain(element):
-#         my_list.append(item)
-
-####################################################
-####################################################
 # Harry is rational but not bad
 
 
-def generate_num_chapter_with_titles(dictionary):
+def generate_num_chapter_with_titles():
+    """
+    A generator function that pass on all unordered html files in directory "potter" and for each
+    html file extract from the title the number og chapter and the correct new file name to be rename
+    this file.
+    For example: for the file 1.html that inside of it has the chapter:
+                Chapter 81: Taboo Tradeoffs, Pt 3,
+                but the correct chapter of 1 is:  A Day of Very Low Probability
+                the name of the file will be rename to:  1 A Day of Very Low Probability.html
+                and 81.html will be rename to: 81 Taboo Tradeoffs, Pt 3.html
+    :return: yield num of chapter and new file name
+    """
     for filename in os.listdir("resources/potter"):
-        file = open("resources/potter/" + filename, "r", encoding="UTF8")
-        soup = BeautifulSoup(file, 'html.parser')
-
-        for title in soup.find('title'):
+        with open("resources/potter/" + filename, "r", encoding="UTF8") as file:
+            soup = BeautifulSoup(file, 'html.parser')
+            title = soup.find('title')
             new_string = title.get_text().replace("Harry Potter and the Methods of Rationality, Chapter", "")
             num_of_chapter = new_string.split()[0][:-1]
             new_file_name = re.sub('[:]', '', new_string)
-            dictionary[num_of_chapter] = new_file_name
+            yield num_of_chapter, new_file_name
 
 
-dictionary = {}
-generate_num_chapter_with_titles(dictionary)
+def change_files_name():
+    """
+    Call a function that generate all number of chapters with their correct title names of
+    chapter, and build a dictionary that the keys are a the number of chapter and the values
+    are the correct name of file that includes the number of chapter and the title, then rename
+    all the .html files to their correct names
+    :return: None
+    """
+    dictionary = {}
+    for num_chapter, new_name_file in generate_num_chapter_with_titles():
+        dictionary[num_chapter] = new_name_file
 
-for filename_html in os.listdir("resources/potter"):
-    for num_chapter, new_filename in dictionary.items():
-        if num_chapter == re.sub('[.html]', '', filename_html):
-            os.rename("resources/potter/" + filename_html, "resources/potter/" + new_filename + '.html')
-
-
-
-
-
-            
-# def generate_num_chapter_with_titles():
-#     for filename in os.listdir("resources/potter"):
-#         # try:
-#         file = open("resources/potter/" + filename, "r", encoding="UTF8")
-#         # except FileNotFoundError:
-#         #     print("")
-#         soup = BeautifulSoup(file, 'html.parser')
-#
-#         for title in soup.find('title'):
-#             new_string = title.get_text().replace("Harry Potter and the Methods of Rationality, Chapter", "")
-#             num_chapter = new_string.split()[0][:-1]
-#             new_filename = re.sub('[:]', '', new_string)
-#             yield num_chapter, new_filename
-
-        # file.close()
+    for filename_html in os.listdir("resources/potter"):
+        for num_of_chapter, new_file_name in dictionary.items():
+            if num_of_chapter == re.sub('[.html]', '', filename_html):
+                os.rename("resources/potter/" + filename_html, "resources/potter/" + new_file_name + '.html')
 
 
-# for num_of_chapter, new_file_name in generate_num_chapter_with_titles():
-#     for filename_html in os.listdir("resources/potter"):
-#         if num_of_chapter == re.sub('[.html]', '', filename_html):
-#             os.rename("resources/potter/" + filename_html, "resources/potter/" + new_file_name)
+if __name__ == '__main__':
+    print(f"Regular version: { interleave('abc', [1, 2, 3], ('!', '@', '#')) }")
+    print(f"Generator version: { my_list }")
 
+    change_files_name()
+
+
+# for num_chapter, new_filename in generate_num_chapter_with_titles():
