@@ -3,30 +3,6 @@ import random
 import string
 
 
-names = ['Yam', 'Gal', 'Orpaz', 'Aviram']
-greek_names = list(map(lambda name: name + 'os', names))
-print(f"Greek names: {greek_names}")
-print("--------------------------------------------")
-################################################
-
-numbers = [1, 2, 3, 4, 5]
-square_list = [number * number for number in numbers]
-print(f"square list (from list): {square_list}")
-
-square_range = [number * number for number in range(1, 6)]
-print(f"square list (from range): {square_range}")
-print("--------------------------------------------")
-#################################################
-
-list_of_tuples = [(number, number+1) for number in range(1, 6)]
-print(f"list_of_tuples (from range): {list_of_tuples}")
-print("--------------------------------------------")
-#################################################
-names = ['Margaret Thatcher', 'Karl Marx', "Ze'ev Jabotinsky", 'Bertrand Russell', 'Fidel Castro']
-long_names = list(filter(lambda long_name: len(long_name) > 12, names))
-print(f"long names: {long_names}")
-print("---------------------------------------------")
-######################################################
 # Handle sqrt
 
 CHARACTERS = f'.{string.digits}{string.ascii_letters}'
@@ -66,33 +42,12 @@ def organize_closet(list_closet):
             or is_float(size_closet)]
 
 
-lst_closet = generate_closet(10)
-print(f"before: {lst_closet}")
-print(f"after: {organize_closet(lst_closet)}")
-
-print(f"before: {['100', '25.0', '12a', 'mEoW', '0']}")
-print(f"after: {organize_closet(['100', '25.0', '12a', 'mEoW', '0'])}")
-
-print(f"before: {['Area51', '303', '2038', 'f00b4r', '314.1']}")
-print(f"after: {organize_closet(['Area51', '303', '2038', 'f00b4r', '314.1'])}")
-
-print("-----------------------------------------")
-#################################################
-
-counter = len({num for num in range(0, 1000) if (num % 7) == 0 and (num % 3) == 0})
-print(f"number of numbers (under 1000) that can be divided by 3 and by 7 is: {counter}")
-
-print("-----------------------------------------")
-#################################################
-
 dice_options_gen_expression = (
     (die1, die2, die3)
     for die1 in range(1, 7)
     for die2 in range(1, 7)
     for die3 in range(1, 7)
 )
-
-print(f"Generator expression: {list(dice_options_gen_expression)}")
 
 
 def dice_generator_function():
@@ -102,16 +57,6 @@ def dice_generator_function():
                 yield die1, die2, die3
 
 
-print(f"Generator function: {list(dice_generator_function())}")
-
-print("----------------------------------------")
-################################################
-
-print(f"Generator expression (set): {set(dice_options_gen_expression)}")
-print(f"Generator function (set): {set(dice_generator_function())}")
-
-print("----------------------------------------")
-################################################
 # Be in peace
 
 
@@ -124,9 +69,6 @@ def words_length(sentence):
     return [len(x) for x in sentence.split()]
 
 
-print("The list of the words length: " + str(words_length("Toto, I've a feeling we're not in Kansas anymore")))
-print("-----------------------------------------------")
-#######################################################
 # א אוהל, פה זה פייתון
 
 
@@ -139,9 +81,6 @@ def get_letters():
            [chr(letter_up) for letter_up in range(ord('A'), ord('Z')+1)]
 
 
-print(get_letters())
-print("------------------------------------------------")
-########################################################
 # Long cat is long
 
 
@@ -154,19 +93,6 @@ def count_words(txt):
     """
     my_clean_text = ''.join(ch for ch in txt if ch.isalnum() or ch.isspace())
     return {word: len(word) for word in my_clean_text.split()}
-
-
-text = """
-You see, wire telegraph is a kind of a very, very long cat.
-You pull his tail in New York and his head is meowing in Los Angeles.
-Do you understand this?
-And radio operates exactly the same way: you send signals here, they receive them there.
-The only difference is that there is no cat.
-"""
-
-print(count_words(text))
-print("--------------------------------------------------")
-##########################################################
 
 
 def full_names(firsts_names, lasts_names, min_length=0):
@@ -185,18 +111,74 @@ def full_names(firsts_names, lasts_names, min_length=0):
             if len(first + ' ' + last) >= min_length]
 
 
-first_names = ['avi', 'moshe', 'yaakov']
-last_names = ['cohen', 'levi', 'mizrahi']
+if __name__ == '__main__':
 
-print(full_names(first_names, last_names))
-print(full_names(first_names, last_names, 10))
+    names = ['Yam', 'Gal', 'Orpaz', 'Aviram']
+    greek_names = list(map(lambda name: name + 'os', names))
+    print(f"Greek names: {greek_names}")
+    print("--------------------------------------------")
 
-print("-------------------------------------------")
-###################################################
+    numbers = [1, 2, 3, 4, 5]
+    square_list = [number * number for number in numbers]
+    print(f"square list (from list): {square_list}")
+    square_range = [number * number for number in range(1, 6)]
+    print(f"square list (from range): {square_range}")
+    print("--------------------------------------------")
 
+    list_of_tuples = [(number, number + 1) for number in range(1, 6)]
+    print(f"list_of_tuples (from range): {list_of_tuples}")
+    print("--------------------------------------------")
 
+    names = ['Margaret Thatcher', 'Karl Marx', "Ze'ev Jabotinsky", 'Bertrand Russell', 'Fidel Castro']
+    long_names = list(filter(lambda long_name: len(long_name) > 12, names))
+    print(f"long names: {long_names}")
+    print("---------------------------------------------")
 
+    lst_closet = generate_closet(10)
+    print(f"before: {lst_closet}")
+    print(f"after: {organize_closet(lst_closet)}")
 
+    print(f"before: {['100', '25.0', '12a', 'mEoW', '0']}")
+    print(f"after: {organize_closet(['100', '25.0', '12a', 'mEoW', '0'])}")
+
+    print(f"before: {['Area51', '303', '2038', 'f00b4r', '314.1']}")
+    print(f"after: {organize_closet(['Area51', '303', '2038', 'f00b4r', '314.1'])}")
+    print("-----------------------------------------")
+
+    counter = len({num for num in range(0, 1000) if (num % 7) == 0 and (num % 3) == 0})
+    print(f"number of numbers (under 1000) that can be divided by 3 and by 7 is: {counter}")
+
+    print("-----------------------------------------")
+
+    print(f"Generator expression: {list(dice_options_gen_expression)}")
+    print(f"Generator function: {list(dice_generator_function())}")
+    print("----------------------------------------")
+    print(f"Generator expression (set): {set(dice_options_gen_expression)}")
+    print(f"Generator function (set): {set(dice_generator_function())}")
+    print("----------------------------------------")
+
+    print("The list of the words length: " + str(words_length("Toto, I've a feeling we're not in Kansas anymore")))
+    print("-----------------------------------------------")
+
+    print(get_letters())
+    print("------------------------------------------------")
+
+    text = """
+    You see, wire telegraph is a kind of a very, very long cat.
+    You pull his tail in New York and his head is meowing in Los Angeles.
+    Do you understand this?
+    And radio operates exactly the same way: you send signals here, they receive them there.
+    The only difference is that there is no cat.
+    """
+    print(count_words(text))
+    print("--------------------------------------------------")
+
+    first_names = ['avi', 'moshe', 'yaakov']
+    last_names = ['cohen', 'levi', 'mizrahi']
+
+    print(full_names(first_names, last_names))
+    print(full_names(first_names, last_names, 10))
+    print("-------------------------------------------")
 
 
 
