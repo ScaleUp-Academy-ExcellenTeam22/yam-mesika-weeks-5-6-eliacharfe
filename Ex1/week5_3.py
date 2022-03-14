@@ -28,4 +28,6 @@ def whisperer():
         return lst
 
 
-print(whisperer())
+if __name__ == '__main__':
+    print(whisperer())
+
