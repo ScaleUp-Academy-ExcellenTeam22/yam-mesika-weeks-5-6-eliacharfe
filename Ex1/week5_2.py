@@ -19,15 +19,6 @@ def join(*args, sep='-'):
     return lst[:-1]
 
 
-print(join([1, 2], [8], [9, 5, 6], sep='@'))
-print(join([1, 2], [8], [9, 5, 6]))
-print(join([1]))
-print(join())
-
-
-print("-----------------------------------------")
-###################################################
-###################################################
 # Piece of cake
 
 
@@ -49,8 +40,14 @@ def get_recipe_price(prices, optionals=[], **ingredients):
     return sum
 
 
-print(get_recipe_price({'chocolate': 18, 'milk': 8}, chocolate=200, milk=100))
-print(get_recipe_price({'chocolate': 18, 'milk': 8}, optionals=['milk'], chocolate=300))
-print(get_recipe_price({}))
+if __name__ == '__main__':
+    print(join([1, 2], [8], [9, 5, 6], sep='@'))
+    print(join([1, 2], [8], [9, 5, 6]))
+    print(join([1]))
+    print(join())
+    print("-----------------------------------------")
 
-#######################################################
+    print(get_recipe_price({'chocolate': 18, 'milk': 8}, chocolate=200, milk=100))
+    print(get_recipe_price({'chocolate': 18, 'milk': 8}, optionals=['milk'], chocolate=300))
+    print(get_recipe_price({}))
+
