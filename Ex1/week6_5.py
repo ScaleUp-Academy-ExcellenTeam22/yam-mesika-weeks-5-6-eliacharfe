@@ -1,4 +1,14 @@
+import json
+import re
+from urllib import request
+
+from bs4 import BeautifulSoup
+import requests
+import lyricsgenius as lg
+
+
 # Group by
+from lyricsgenius import Genius
 
 
 def group_by(func, iterable):
@@ -12,18 +22,15 @@ def group_by(func, iterable):
     :param iterable: An iterable
     :return: Dictionary of key and value like explained
     """
-    dic = {}
+    dictionary = {}
     for item in iterable:
-        if func(item) in dic:
-            dic[func(item)].append(item)
+        if func(item) in dictionary:
+            dictionary[func(item)].append(item)
         else:
-            dic[func(item)] = [item]
-    return dic
+            dictionary[func(item)] = [item]
+    return dictionary
 
 
-print(group_by(len, ["hi", "bye", "yo", "try"]))
-print("------------------------------------------")
-#################################################
 # zipwith
 
 
@@ -40,9 +47,53 @@ def zip_with(func, *args):
     return [func(item) for item in zip(*args)]
 
 
-print(zip_with(sum, [1, 2, 3], [4, 5, 6]))
-print(zip_with(max, (5, 4), (2, 5), (6, -6)))
-print(zip_with(max, (5, 4), (2, 5), (6, -6), (11, 9)))
+def find_most_popular_songs_and_their_producers(url):
+    response = requests.get(url)
+    page = BeautifulSoup(response.content, 'html.parser')
 
-print("-------------------------------------------")
-###################################################
+    div_carts = page.find_all('div', {'class': 'o-chart-results-list-row-container'})
+
+    dictionary = {}
+    for div in div_carts:
+        name_of_song = div.find('h3', {'id': 'title-of-a-story', 'class': 'c-title'}).text.strip()
+        artist_name = div.find('li', {'class': 'lrv-u-width-100p'}).find('span', {'class', 'c-label'}).text.strip()
+        dictionary[name_of_song] = artist_name
+
+    return dictionary
+
+
+def find_lyrics_of_songs(my_dict):
+    print(list(my_dict.keys())[0] + ", " + list(my_dict.values())[0])
+
+    file = open("out.txt", "w", encoding='UTF8')
+    for song_of_name, artist_name in my_dict_top_100.items():
+        write_lyrics(file, artist_name, song_of_name)
+
+    file.close()
+
+
+def write_lyrics(file, artist, song_name):
+    first_artist = artist.split(',')[0]
+    url = 'https://api.lyrics.ovh/v1/' + first_artist + '/' + song_name
+    response = requests.get(url)
+    json_data = json.loads(response.content)
+    lyrics = json_data['lyrics']
+    file.write(f"----------------------------\nSong: {song_name} - Artist: {artist}\n")
+    file.write(lyrics)
+
+
+if __name__ == '__main__':
+    print(group_by(len, ["hi", "bye", "yo", "try"]))
+    print("------------------------------------------")
+
+    print(zip_with(sum, [1, 2, 3], [4, 5, 6]))
+    print(zip_with(max, (5, 4), (2, 5), (6, -6)))
+    print(zip_with(max, (5, 4), (2, 5), (6, -6), (11, 9)))
+    print("-------------------------------------------")
+
+    url_billboard = "https://www.billboard.com/charts/hot-100/"
+    my_dict_top_100 = find_most_popular_songs_and_their_producers(url_billboard)
+    for song_name, artist in my_dict_top_100.items():
+        print(f"Song: {song_name}\nArtist: {artist}\n")
+
+    find_lyrics_of_songs(my_dict_top_100)
