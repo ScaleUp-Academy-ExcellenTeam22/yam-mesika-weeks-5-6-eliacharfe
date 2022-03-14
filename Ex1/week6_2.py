@@ -36,12 +36,6 @@ def calc(num1, num2, math_sign):
     return dictionary[math_sign]
 
 
-print(calc(5, 2, '+'))
-print(calc(5, 2, '-'))
-print(calc(5, 2, '*'))
-print(calc(5, 2, '/'))
-print("-------------------------------------------")
-#######################################################
 # From here to here
 
 
@@ -57,10 +51,6 @@ def apply(func, iterable):
         yield func(item)
 
 
-square_check = apply(lambda number: number ** 2, [5, -1, 6, -8, 0])
-print(tuple(square_check) == (25, 1, 36, 64, 0))
-print("------------------------------------------------")
-###########################################################
 # map
 
 
@@ -73,10 +63,6 @@ def generate_first_names(lst_full_names):
     return map(lambda name:  name.split(' ', 1)[0], lst_full_names)
 
 
-for first_name in generate_first_names(['Bob Smith', 'Alice Johnson', 'Ali Baba']):
-    print(first_name)
-print("----------------------------------------------")
-##########################################################
 # filter
 
 
@@ -89,26 +75,6 @@ def generate_only_polyndromes(lst_of_words):
     return filter(lambda word: word == word[::-1], lst_of_words)
 
 
-for polyndrome in generate_only_polyndromes(['abba', 'bob', 'week6_2', '1234', 'python', 'ArqqrA', 'WoW']):
-    print(polyndrome)
-
-print("---------------------------------------------------")
-###########################################################
-
-closet = [
-    {'name': 'Peter', 'year_of_birth': 1927, 'gender': 'Male'},
-    {'name': 'Edmund', 'year_of_birth': 1930, 'gender': 'Male'},
-    {'name': 'Lucy', 'year_of_birth': 1932, 'gender': 'Female'},
-    {'name': 'Susan', 'year_of_birth': 1928, 'gender': 'Female'},
-    {'name': 'Jadis', 'year_of_birth': 0, 'gender': 'Female'},
-]
-
-print(f"Sorted by the last character of the name: ")
-print('\n'.join(map(str,
-                    sorted(closet, key=lambda d: d['name'][-1]))))
-
-print("---------------------------------------------------")
-###########################################################
 # Personally adjusted filter
 
 
@@ -124,11 +90,6 @@ def my_filter(func, iterable):
             yield item
 
 
-for polyndrome in my_filter(lambda word: word == word[::-1], ['abba', 'bob', 'week6_2', '1234', 'python', 'ArqqrA', 'WoW']):
-    print(polyndrome)
-
-print("--------------------------------------------")
-####################################################
 # Stay ? positive
 
 
@@ -141,10 +102,6 @@ def get_positive_numbers(inp):
     return list(filter(lambda x: int(x) > 0, list(map(int, inp.split(",")))))
 
 
-print(get_positive_numbers(input("Enter a serie of numbers separated by ',': \n")))
-
-print("--------------------------------------------------------\n")
-###############################################################
 # 2000 running
 
 
@@ -160,8 +117,45 @@ def timer(f, *args):
     return time.time() - start_time
 
 
-print(timer(print, "Hello"))
-print(timer(zip, [1, 2, 3], [4, 5, 6]))
+if __name__ == '__main__':
+    print(calc(5, 2, '+'))
+    print(calc(5, 2, '-'))
+    print(calc(5, 2, '*'))
+    print(calc(5, 2, '/'))
+    print("-------------------------------------------")
 
+    square_check = apply(lambda number: number ** 2, [5, -1, 6, -8, 0])
+    print(tuple(square_check) == (25, 1, 36, 64, 0))
+    print("------------------------------------------------")
 
+    for first_name in generate_first_names(['Bob Smith', 'Alice Johnson', 'Ali Baba']):
+        print(first_name)
+    print("----------------------------------------------")
 
+    for polyndrome in generate_only_polyndromes(['abba', 'bob', 'week6_2', '1234', 'python', 'ArqqrA', 'WoW']):
+        print(polyndrome)
+    print("---------------------------------------------------")
+
+    closet = [
+        {'name': 'Peter', 'year_of_birth': 1927, 'gender': 'Male'},
+        {'name': 'Edmund', 'year_of_birth': 1930, 'gender': 'Male'},
+        {'name': 'Lucy', 'year_of_birth': 1932, 'gender': 'Female'},
+        {'name': 'Susan', 'year_of_birth': 1928, 'gender': 'Female'},
+        {'name': 'Jadis', 'year_of_birth': 0, 'gender': 'Female'},
+    ]
+
+    print(f"Sorted by the last character of the name: ")
+    print('\n'.join(map(str,
+                        sorted(closet, key=lambda d: d['name'][-1]))))
+    print("---------------------------------------------------")
+
+    for polyndrome in my_filter(lambda word: word == word[::-1],
+                                ['abba', 'bob', 'week6_2', '1234', 'python', 'ArqqrA', 'WoW']):
+        print(polyndrome)
+    print("--------------------------------------------")
+
+    print(get_positive_numbers(input("Enter a serie of numbers separated by ',': \n")))
+    print("--------------------------------------------------------")
+
+    print(timer(print, "Hello"))
+    print(timer(zip, [1, 2, 3], [4, 5, 6]))
