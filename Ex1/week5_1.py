@@ -14,11 +14,6 @@ def find_files_in_directory_startwith_deep(path):
     return [file for file in os.listdir(path) if file.startswith("deep")]
 
 
-print(f"list of files that start with deep: {find_files_in_directory_startwith_deep('images')}")
-
-print("--------------------------------------\n")
-##############################################
-##############################################
 # I don't have vinaigrette
 
 
@@ -48,15 +43,15 @@ def random_date_between_dates_check_if_monday(date1, date2):
         print("I dont have vinaigrette")
 
 
-date_1 = input("Enter a date\n")
-date_2 = input("Enter a second date\n")
+if __name__ == '__main__':
+    print(f"list of files that start with deep: {find_files_in_directory_startwith_deep('images')}")
+    print("--------------------------------------\n")
 
-try:
-    random_date_between_dates_check_if_monday(datetime.datetime.strptime(date_1, "%Y-%m-%d").date(),
-                                              datetime.datetime.strptime(date_2, "%Y-%m-%d").date())
-except ValueError:
-    print("Wrong format: the correct format is: YYYY-MM-DD")
-
-#####################################################
-
+    date_1 = input("Enter a date\n")
+    date_2 = input("Enter a second date\n")
+    try:
+        random_date_between_dates_check_if_monday(datetime.datetime.strptime(date_1, "%Y-%m-%d").date(),
+                                                  datetime.datetime.strptime(date_2, "%Y-%m-%d").date())
+    except ValueError:
+        print("Wrong format: the correct format is: YYYY-MM-DD")
 
