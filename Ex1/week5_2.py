@@ -3,12 +3,12 @@
 
 def join(*args, sep='-'):
     """
-    The function a unlimited number a lists and an option parameter (called sep) and put it between each 2 lists,
-    if nothing is passed in the parameter will put by default the character '-'
-    :param args: lists of arguments
-    :param sep: the parameter to put between each 2 lists
-    :return: a new list with the elements of the lists which between the elements of 2 different lists there
-    is sep (or '-' by default)
+    The function a unlimited number a lists and an option parameter (called sep) and put it between each
+    2 lists, if nothing is passed in the parameter will put by default the character '-'.
+    :param args: Lists of arguments.
+    :param sep: The parameter to put between each 2 lists.
+    :return: A new list with the elements of the lists which between the elements of 2 different
+    lists there is sep (or '-' by default).
     """
     if not args:
         return None
@@ -24,20 +24,19 @@ def join(*args, sep='-'):
 
 def get_recipe_price(prices, optionals=[], **ingredients):
     """
-    This function calculates how much we need to pay for the ingredients passed (with their price and quantity
-     for 100g) in order to form a recipe
-    :param prices: A dictionary of ingredients with their prices (the values are their price for 100g)
-    :param optionals: An optional parameter that gets a list of ingredients to ignore
-    :param ingredients: In each argument passed in the parameter we specify the name of the ingredient and its value
-    is the amount (in grams) that we need to buy for the recipe
-    :return: The price we need to pay for buying the indgredients to the recipe
+    This function calculates how much we need to pay for the ingredients passed (with their price
+    and quantity for 100g) in order to form a recipe.
+    :param prices: A dictionary of ingredients with their prices (the values are their price for 100g).
+    :param optionals: An optional parameter that gets a list of ingredients to ignore.
+    :param ingredients: In each argument passed in the parameter we specify the name of the ingredient
+    and its value is the amount (in grams) that we need to buy for the recipe.
     """
-    sum = 0
+    price_of_ingredients = 0
     for key in prices:
         for ingredient in ingredients:
-            if key == ingredient and not ingredient in optionals:
-                sum += prices[key] * ingredients.get(key) // 100
-    return sum
+            if key == ingredient and ingredient not in optionals:
+                price_of_ingredients += prices[key] * ingredients.get(key) // 100
+    return price_of_ingredients
 
 
 if __name__ == '__main__':
