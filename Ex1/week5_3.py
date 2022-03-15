@@ -11,7 +11,7 @@ def find_all_hidden_messages_in_a_binary_file_via_pattern(path, pattern):
     """
     reg = re.compile(pattern)
     with open(path, "rb") as encrypted_binary_file:
-        return [''.join(elem) for elem in [hidden_msg.decode('ascii')
+        return [''.join(msg) for msg in [hidden_msg.decode('ascii')
                 for line in encrypted_binary_file.readlines()
                 if reg.findall(line) for hidden_msg in reg.findall(line)]]
 
