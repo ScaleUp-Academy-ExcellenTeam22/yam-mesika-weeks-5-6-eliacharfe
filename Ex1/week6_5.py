@@ -62,14 +62,12 @@ def find_most_popular_songs_and_their_producers(url):
     return dictionary
 
 
-def find_lyrics_of_songs(my_dict):
-    print(list(my_dict.keys())[0] + ", " + list(my_dict.values())[0])
-
-    file = open("out.txt", "w", encoding='UTF8')
+def find_lyrics_of_songs():
+    output_file = open("out.txt", "w", encoding='UTF8')
     for song_of_name, artist_name in my_dict_top_100.items():
-        write_lyrics(file, artist_name, song_of_name)
+        write_lyrics(output_file, artist_name, song_of_name)
 
-    file.close()
+    output_file.close()
 
 
 def write_lyrics(file, artist, song_name):
@@ -96,4 +94,4 @@ if __name__ == '__main__':
     for song_name, artist in my_dict_top_100.items():
         print(f"Song: {song_name}\nArtist: {artist}\n")
 
-    find_lyrics_of_songs(my_dict_top_100)
+    find_lyrics_of_songs()
