@@ -3,10 +3,6 @@ import os
 import re
 from bs4 import BeautifulSoup
 
-# Mixed Tools
-
-# -- Regular version:
-
 
 def interleave(*args):
     """
@@ -17,13 +13,7 @@ def interleave(*args):
     :param args: An iterable
     :return: A list of elements mixed in order
     """
-    list_of_tuples = []
-    for elem in zip(*args):
-        list_of_tuples.append(elem)
-    return list(sum(list_of_tuples, ()))
-
-
-# -- Generator version:
+    return list(sum([elem for elem in zip(*args)], ()))
 
 
 def interleave_generator(*args):
@@ -45,9 +35,6 @@ my_list += [item for element in interleave_generator('abc', [1, 2, 3], ('!', '@'
             for item in itertools.chain(element)]
 
 
-# Harry is rational but not bad
-
-
 def generate_num_chapter_with_titles():
     """
     A generator function that pass on all unordered html files in directory "potter" and for each
@@ -62,12 +49,16 @@ def generate_num_chapter_with_titles():
     """
     for filename in os.listdir("resources/potter"):
         with open("resources/potter/" + filename, "r", encoding="UTF8") as file:
-            soup = BeautifulSoup(file, 'html.parser')
-            title = soup.find('title')
+            html_file = BeautifulSoup(file, 'html.parser')
+            title = html_file.find('title')
             new_string = title.get_text().replace("Harry Potter and the Methods of Rationality, Chapter", "")
             num_of_chapter = new_string.split()[0][:-1]
             new_file_name = re.sub('[:]', '', new_string)
             yield num_of_chapter, new_file_name
+
+
+def get_dictionary_of_num_chapter_new_filename():
+    return {num_chapter: new_name_file for num_chapter, new_name_file in generate_num_chapter_with_titles()}
 
 
 def change_files_name():
@@ -78,12 +69,10 @@ def change_files_name():
     all the .html files to their correct names
     :return: None
     """
-    dictionary = {}
-    for num_chapter, new_name_file in generate_num_chapter_with_titles():
-        dictionary[num_chapter] = new_name_file
+    num_chapter_filename_dictionary = get_dictionary_of_num_chapter_new_filename()
 
     for filename_html in os.listdir("resources/potter"):
-        for num_of_chapter, new_file_name in dictionary.items():
+        for num_of_chapter, new_file_name in num_chapter_filename_dictionary.items():
             if num_of_chapter == re.sub('[.html]', '', filename_html):
                 os.rename("resources/potter/" + filename_html, "resources/potter/" + new_file_name + '.html')
 
@@ -95,4 +84,3 @@ if __name__ == '__main__':
     change_files_name()
 
 
-# for num_chapter, new_filename in generate_num_chapter_with_titles():
