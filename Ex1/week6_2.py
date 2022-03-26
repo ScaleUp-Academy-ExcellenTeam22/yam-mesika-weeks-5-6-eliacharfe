@@ -1,42 +1,26 @@
+import operator
 import time
 
-# Closing math
+
+def create_dictionary_of_calculation_functions(first_number: float, second_number: float):
+    dictionary_of_calculation_functions = {
+        '+': operator.add(first_number, second_number),
+        '-': operator.sub(first_number, second_number),
+        '*': operator.mul(first_number, second_number),
+        '/': operator.truediv(first_number, second_number)
+    }
+    return dictionary_of_calculation_functions
 
 
-def add(num1, num2):
-    return num1 + num2
-
-
-def subtract(num1, num2):
-    return num1 - num2
-
-
-def multiply(num1, num2):
-    return num1 * num2
-
-
-def divide(num1, num2):
-    return num1 / num2
-
-
-def calc(num1, num2, math_sign):
+def calc(first_number: float, second_number: float, math_sign):
     """
     Gets 2 numbers and a math sign (+, -, * or /) and return the result by using a dictionary of functions
-    :param num1: First number
-    :param num2: Second number
+    :param first_number: First number
+    :param second_number: Second number
     :param math_sign: A math sign
     :return:
     """
-    dictionary = {
-        '+': add(num1, num2),
-        '-': subtract(num1, num2),
-        '*': multiply(num1, num2),
-        '/': divide(num1, num2)
-    }
-    return dictionary[math_sign]
-
-
-# From here to here
+    return create_dictionary_of_calculation_functions(first_number, second_number)[math_sign]
 
 
 def apply(func, iterable):
