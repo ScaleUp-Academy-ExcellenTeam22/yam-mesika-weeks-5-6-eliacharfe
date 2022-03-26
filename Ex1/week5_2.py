@@ -1,25 +1,26 @@
 # Cup of join
+import functools
 
 
-def join(*args, sep='-'):
+def join(*joined_list: list[any], sep='-'):
     """
-    The function a unlimited number a lists and an option parameter (called sep) and put it between each
-    2 lists, if nothing is passed in the parameter will put by default the character '-'.
+    The function gets an unlimited number of lists and an optional parameter (called sep) and put it
+    between each 2 lists.
     :param args: Lists of arguments.
     :param sep: The parameter to put between each 2 lists.
     :return: A new list with the elements of the lists which between the elements of 2 different
     lists there is sep (or '-' by default).
     """
-    if not args:
-        return None
+    if not joined_list:
+        return list[any]
 
-    return [argument for lst_args in args for argument in lst_args + [sep]][:-1]
+    return [argument for lst_args in joined_list for argument in lst_args + [sep]][:-1]
 
 
 # Piece of cake
 
 
-def get_recipe_price(prices, optionals=[], **ingredients):
+def get_recipe_price(prices: dict, optionals=[], **ingredients):
     """
     This function calculates how much we need to pay for the ingredients passed (with their price
     and quantity for 100g) in order to form a recipe.
@@ -28,12 +29,12 @@ def get_recipe_price(prices, optionals=[], **ingredients):
     :param ingredients: In each argument passed in the parameter we specify the name of the ingredient
     and its value is the amount (in grams) that we need to buy for the recipe.
     """
-    price_of_ingredients = 0
-    for key in prices:
-        for ingredient in ingredients:
-            if key == ingredient and ingredient not in optionals:
-                price_of_ingredients += prices[key] * ingredients.get(key) // 100
-    return price_of_ingredients
+    if not prices and not ingredients:
+        return 0
+
+    return functools.reduce(lambda prices_sum, next_price: prices_sum + next_price,
+                            [ingredients[price] * prices[price] // 100
+                             for price in prices if price not in optionals])
 
 
 if __name__ == '__main__':
