@@ -3,8 +3,6 @@ import random
 import string
 
 
-# Handle sqrt
-
 CHARACTERS = f'.{string.digits}{string.ascii_letters}'
 WEIGHTS = [1] * len(f'.{string.digits}') + [0.05] * len(string.ascii_letters)
 
@@ -19,9 +17,9 @@ def generate_closet(closet_size=20, shoe_size=4):
 
 def is_float(my_string):
     """
-    Check if the string represent a number (float) if so return true else false
-    :param my_string: A string to check
-    :return: True if can be converted to float number else false
+    Check if the string represent a number (float) if so return true else false.
+    :param my_string: A string to check.
+    :return: True if can be converted to float number else false.
     """
     try:
         return float(my_string)
@@ -35,11 +33,11 @@ def organize_closet(list_closet):
     that represent a number.
     Possible input: ['Area51', '303', '2038', 'f00b4r', '314.1']
     The output: [17.41, 45.14, 17.72]
-    :param list_closet: A list of strings representing sizes of clothes
-    :return: A list of the square root of the strings that represent a number (after rounding to 2 nums after point)
+    :param list_closet: A list of strings representing sizes of clothes.
+    :return: A list of the square root of the strings that represent a number (after rounding to 2 nums after point).
     """
-    return [round(math.sqrt(float(size_closet)), 2) for size_closet in list_closet if size_closet.isnumeric()
-            or is_float(size_closet)]
+    return [round(math.sqrt(float(size_closet)), 2) for size_closet in list_closet
+            if size_closet.isnumeric() or is_float(size_closet)]
 
 
 dice_options_gen_expression = (
@@ -57,31 +55,22 @@ def dice_generator_function():
                 yield die1, die2, die3
 
 
-# Be in peace
-
-
 def words_length(sentence):
     """
-    Function that get a sentence of words and returns a list of the length of the words in it
-    :param sentence: The sentence
-    :return: A list of the length of the words in the sentence sent
+    Function that get a sentence of words and returns a list of the length of the words in it.
+    :param sentence: The sentence.
+    :return: A list of the length of the words in the sentence sent.
     """
     return [len(x) for x in sentence.split()]
 
 
-# א אוהל, פה זה פייתון
-
-
 def get_letters():
     """
-    A function that returns a list of all lowercase/uppercase letters
-    :return: A list of all lowercase/uppercase letters
+    A function that returns a list of all lowercase and uppercase letters
+    :return: A list of all lowercase and uppercase letters
     """
-    return [chr(letter_low) for letter_low in range(ord('a'), ord('z')+1)] +\
+    return [chr(letter_low) for letter_low in range(ord('a'), ord('z')+1)] + \
            [chr(letter_up) for letter_up in range(ord('A'), ord('Z')+1)]
-
-
-# Long cat is long
 
 
 def count_words(txt):
@@ -100,15 +89,19 @@ def full_names(firsts_names, lasts_names, min_length=0):
     Gets a list of first names and a list of last names and an optional parameter min_length and return
     a list of all combinations of first names with last names that are greater or equal to the min_length
     if passed (by default min_length is 0), that after will turn each first/last name to uppercase at
-    the first letter
-    :param firsts_names: A list of first names
-    :param lasts_names: A list of last names
-    :param min_length: (optional) The full names that are greater than this parameter
-    :return: List of all full names
+    the first letter.
+    :param firsts_names: A list of first names.
+    :param lasts_names: A list of last names.
+    :param min_length: (optional) The full names that are greater than this parameter.
+    :return: List of all full names.
     """
-    return [first[0].upper() + first[1:] + " " + last[0].upper() + last[1:]
+    return [upper_first_letter_of_name(first) + " " + upper_first_letter_of_name(last)
             for first in firsts_names for last in lasts_names
-            if len(first + ' ' + last) >= min_length]
+            if len(first) + len(last) + 1 >= min_length]
+
+
+def upper_first_letter_of_name(name: str):
+    return name[0].upper() + name[1:]
 
 
 if __name__ == '__main__':
@@ -147,7 +140,6 @@ if __name__ == '__main__':
 
     counter = len({num for num in range(0, 1000) if (num % 7) == 0 and (num % 3) == 0})
     print(f"number of numbers (under 1000) that can be divided by 3 and by 7 is: {counter}")
-
     print("-----------------------------------------")
 
     print(f"Generator expression: {list(dice_options_gen_expression)}")
