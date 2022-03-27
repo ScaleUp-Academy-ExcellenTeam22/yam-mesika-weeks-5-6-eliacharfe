@@ -34,7 +34,7 @@ def get_recipe_price(prices: dict, optionals=[], **ingredients):
 
 
 if __name__ == '__main__':
-    print(join([1, 2], [8], [9, 5, 6], sep='@'))
+    print(join([1, 2], [8], [9, 5, 6], separator='@'))
     print(join([1, 2], [8], [9, 5, 6]))
     print(join([1]))
     print(join())
