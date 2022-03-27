@@ -1,8 +1,7 @@
-# Cup of join
 import functools
 
 
-def join(*joined_list: list[any], sep='-'):
+def join(*joined_list: list[any], separator='-'):
     """
     The function gets an unlimited number of lists and an optional parameter (called sep) and put it
     between each 2 lists.
@@ -14,10 +13,7 @@ def join(*joined_list: list[any], sep='-'):
     if not joined_list:
         return list[any]
 
-    return [argument for lst_args in joined_list for argument in lst_args + [sep]][:-1]
-
-
-# Piece of cake
+    return [argument for lst_args in joined_list for argument in lst_args + [separator]][:-1]
 
 
 def get_recipe_price(prices: dict, optionals=[], **ingredients):
