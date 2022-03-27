@@ -5,8 +5,8 @@ def join(*joined_list: list[any], separator='-'):
     """
     The function gets an unlimited number of lists and an optional parameter (called sep) and put it
     between each 2 lists.
-    :param args: Lists of arguments.
-    :param sep: The parameter to put between each 2 lists.
+    :param joined_list: Lists of arguments.
+    :param separator: The parameter to put between each 2 lists.
     :return: A new list with the elements of the lists which between the elements of 2 different
     lists there is sep (or '-' by default).
     """
