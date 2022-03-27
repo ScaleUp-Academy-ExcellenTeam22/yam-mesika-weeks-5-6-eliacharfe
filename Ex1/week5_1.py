@@ -8,7 +8,7 @@ def find_files_with_deep_prefix(directory_path: str):
     This function gets the path to a directory and return a list of files that start with the string "deep"
     :return: List of files that start with "deep"
     """
-    return [file for file in os.listdir(directory_path) if file.startswith("deep")]
+    return [filename for filename in os.listdir(directory_path) if filename.startswith("deep")]
 
 
 def get_random_date_between(first_date: datetime.date, second_date: datetime.date):
