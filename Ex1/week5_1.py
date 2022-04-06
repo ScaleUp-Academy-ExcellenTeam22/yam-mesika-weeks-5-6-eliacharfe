@@ -6,6 +6,7 @@ import random
 def find_files_with_deep_prefix(directory_path: str):
     """
     This function gets the path to a directory and return a list of files that start with the string "deep"
+    :param directory_path: The path to the directory.
     :return: List of files that start with "deep"
     """
     return [filename for filename in os.listdir(directory_path) if filename.startswith("deep")]
@@ -30,8 +31,8 @@ def random_date_between_dates_check_if_monday(first_input_date, second_input_dat
         first_date = datetime.datetime.strptime(first_input_date, "%Y-%m-%d").date()
         second_date = datetime.datetime.strptime(second_input_date, "%Y-%m-%d").date()
     except ValueError:
-        print("Wrong format: the correct format is: YYYY-MM-DD")
-        return
+        return "Wrong format: the correct format is: YYYY-MM-DD"
+
     random_date = get_random_date_between(first_date, second_date)
     print("Random date between is: " + str(random_date))
     if random_date.isoweekday() == 2:
